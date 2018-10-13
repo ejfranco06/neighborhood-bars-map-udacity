@@ -10,9 +10,25 @@
 }
 
 .Header {
-  border-bottom: 2px solid #8c8b8b;
+  border-bottom: 2px solid #d68b3c;
   width: 100%;
   background-color: #000;
   color: #FFF;
   text-align: center;
+}
+
+.SideBar {
+  height: 100%;
+  width: 260px;
+  background-color: #858585;
+  color: #FFF;
+  position: fixed;
+  border: 3px solid #d68b3c;
+}
+
+
+input {
+  padding: 0.2em;
+  box-sizing: border-box;
+  width: 100%
 }
