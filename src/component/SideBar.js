@@ -16,7 +16,7 @@ class SideBar extends Component {
 
   render() {
     return(
-      <div className="SideBar">
+      <div className="container-sidebar">
       <input
         type="text"
         placeholder="Search for"
