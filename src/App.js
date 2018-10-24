@@ -15,26 +15,33 @@ class App extends Component {
           zoom: 15
       },
       mapLoaded: false,
-      venuesBar: null,
-      venuesFood: null,
-      venuesRecreation: null,
+      venuesAll: [],
+      venuesBar: [],
+      venuesFood: [],
+      venuesRecreation: [],
     }
     this.setMap = this.setMap.bind(this);
+    this.setVenues = this.setVenues.bind(this);
   }
 
   componentDidMount() {
-    let location = this.state.mapCenter.center;
-    let bars = simpleFetch(location, 'bar');
-    this.setState({venuesBar: bars});
-    let food = simpleFetch(location, 'food');
-    this.setState({venuesFood: food});
-    let recreation = simpleFetch(location, 'recreation');
-    this.setState({venuesRecreation: recreation});
+     let location = this.state.mapCenter.center;
+     simpleFetch(location, 'venuesBar', this.setVenues);
+
+    simpleFetch(location, 'venuesFood', this.setVenues);
+    simpleFetch(location, 'venuesRecreation', this.setVenues);
+
   }
 
   setMap(map) {
       this.setState({map});
       this.setState({mapLoaded: true});
+  }
+
+  setVenues(data) {
+    this.setState(data);
+    let key = Object.keys(data)[0];
+    this.setState({venuesAll: this.state.venuesAll.concat(data[key])});
   }
 
 
@@ -44,7 +51,7 @@ class App extends Component {
       <div className="container-app">
       <Header />
       <div className="container-main-content">
-      <SideBar/>
+      <SideBar allVenues={this.state.venuesAll}/>
       <Map onMapLoad={this.setMap} mapCenter={this.state.mapCenter}/>
       </div>
 

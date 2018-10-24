@@ -7,37 +7,35 @@ const radius = 'radius=250';
 
 
 function getCategoryID(category) {
-  if(category === 'bar')
+  if(category === 'venuesBar')
     return '4bf58dd8d48988d116941735';
-  if(category === 'food')
+  if(category === 'venuesFood')
     return '4d4b7105d754a06374d81259';
-  if(category === 'recreation')
+  if(category === 'venuesRecreation')
     return '4d4b7105d754a06377d81259';
 }
 
 
-export function simpleFetch(location, category) {
+export async function simpleFetch(location, category, update) {
   const ll = `ll=${location.lat},${location.lng}`;
   const categoryID = 'categoryId='+ getCategoryID(category);
 
+
   let venues = null;
-  fetch(`${url}${endPoint}&${client_id}&${client_secret}&${version}&${ll}&${radius}&${categoryID}&limit=10`)
-    .then(response => {
+  try{
+    let response = await fetch(`${url}${endPoint}&${client_id}&${client_secret}&${version}&${ll}&${radius}&${categoryID}&limit=10`);
+    if(response.status === 200) {
+      venues = await response.json();
+    } else {
+      console.log("you need from service worker");
+    }
 
-      if(response.status === 200) {
-        return response.json();
-      } else {
-          console.log(response);
-      }
-    })
-    .then(listOfVenues => {
-      venues = listOfVenues.response.venues;
-      console.log(venues);
+  } catch(e) {
+      console.log(e);
+  }
+  const data = {[category]: venues.response.venues};
+  update(data);
 
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  return  venues.response.venues;
 
-    return venues;
 }
