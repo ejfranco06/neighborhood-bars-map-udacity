@@ -5,32 +5,41 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ""
+      query: "",
+      filteredVenues: []
     };
 
     this.updateQuery = this.updateQuery.bind(this);
   }
 
   updateQuery(event) {
-    this.setState({ query: event.target.value.trim() });
+
+    const newQuery = event.target.value.trim();
+    const allVenues = this.props.allVenues;
+    this.setState({ query: event.target.value.toLowerCase().trim() });
+    if(!newQuery) {
+      this.setState({filteredVenues: []});
+    } else {
+      const temp = allVenues.filter(venue => venue.name.toLowerCase().includes(newQuery));
+      this.setState({filteredVenues: temp});
+    }
   }
 
   render() {
-    let venues = [];
-    if(this.props.allVenues){
-      venues = this.props.allVenues
-    }
+      let venues = this.props.allVenues;
+      if(this.state.query){
+        venues = this.state.filteredVenues;
+      }
+
     return (
       <div className="container-sidebar">
-        <select>
-          <option value="bar">bar</option>
-          <option value="restaurant">restaurant</option>
-          <option value="noFilter" default>Select a filter</option>
+        <input type="search" name="filter" onChange={this.updateQuery} placeholder="Filter locations..."
+               aria-label="Search through venues">
 
-        </select>
+        </input>
         <h2>What is the state {this.state.query}</h2>
         <ul className="list-venues">
-          {venues.map(venue => <VenueCard id={venue.id} venue={venue} />)}
+          {venues.map(venue => <VenueCard key={venue.id} venue={venue} map={this.props.map} google={this.props.google} />)}
         </ul>
       </div>
     );

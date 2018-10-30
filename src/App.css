@@ -61,11 +61,16 @@ html, body, #root {
 }
 
 .container-venue-card {
+  max-width: 190px;
+  height: 100px;
   margin: 2px;
   padding: 10px;
   border-radius: 10px;
   border: 2px solid #d4d4d4;
 
+}
+.container-infowindow{
+  max-width: 200px;
 }
 
 

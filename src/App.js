@@ -14,6 +14,7 @@ class App extends Component {
           center: { lat: 40.735844, lng: -73.99056 },
           zoom: 15
       },
+      google: null,
       mapLoaded: false,
       venuesAll: [],
       venuesBar: [],
@@ -36,6 +37,7 @@ class App extends Component {
   setMap(map) {
       this.setState({map});
       this.setState({mapLoaded: true});
+      this.setState({google: window.google.maps});
   }
 
   setVenues(data) {
@@ -51,7 +53,7 @@ class App extends Component {
       <div className="container-app">
       <Header />
       <div className="container-main-content">
-      <SideBar allVenues={this.state.venuesAll}/>
+      <SideBar map={this.state.map} mapLoaded={this.state.map} google={this.state.google} allVenues={this.state.venuesAll}/>
       <Map onMapLoad={this.setMap} mapCenter={this.state.mapCenter}/>
       </div>
 
