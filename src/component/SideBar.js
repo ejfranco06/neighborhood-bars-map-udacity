@@ -33,11 +33,9 @@ class SideBar extends Component {
 
     return (
       <div className="container-sidebar">
-        <input type="search" name="filter" onChange={this.updateQuery} placeholder="Filter locations..."
+        <input type="search" name="filter" className="input-field" onChange={this.updateQuery} placeholder="Filter locations..."
                aria-label="Search through venues">
-
         </input>
-        <h2>What is the state {this.state.query}</h2>
         <ul className="list-venues">
           {venues.map(venue => <VenueCard key={venue.id} venue={venue} map={this.props.map} google={this.props.google} />)}
         </ul>
