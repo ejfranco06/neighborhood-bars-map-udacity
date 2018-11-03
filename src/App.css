@@ -53,6 +53,7 @@ html, body, #root {
   margin: 0 1px;
   margin-left: 10px;
   border: 2px solid #010101;
+   background: url(./util/loading.gif) 50% no-repeat;
 }
 
 .input-field{
@@ -63,8 +64,9 @@ html, body, #root {
 
 .list-venues{
   display: flex;
+  font-size: 12px;
   flex-direction: column;
-  overflow: scroll;
+  overflow-x: hidden;
   align-items: center;
   border: 2px solid #d4d4d4;
   margin: 2px;
@@ -105,7 +107,7 @@ html, body, #root {
   .list-venues{
     display: flex;
     flex-direction: row;
-    overflow-y: hidden;
+    overflow-x: scroll;
   }
 
   .container-venue-card{

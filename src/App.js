@@ -16,10 +16,7 @@ class App extends Component {
       },
       google: null,
       mapLoaded: false,
-      venuesAll: [],
-      venuesBar: [],
-      venuesFood: [],
-      venuesRecreation: [],
+      allVenues: [],      
     }
     this.setMap = this.setMap.bind(this);
     this.setVenues = this.setVenues.bind(this);
@@ -27,10 +24,7 @@ class App extends Component {
 
   componentDidMount() {
      let location = this.state.mapCenter.center;
-     simpleFetch(location, 'venuesBar', this.setVenues);
-
-    simpleFetch(location, 'venuesFood', this.setVenues);
-    simpleFetch(location, 'venuesRecreation', this.setVenues);
+     simpleFetch(location, this.setVenues);
 
   }
 
@@ -40,10 +34,8 @@ class App extends Component {
       this.setState({google: window.google.maps});
   }
 
-  setVenues(data) {
-    this.setState(data);
-    let key = Object.keys(data)[0];
-    this.setState({venuesAll: this.state.venuesAll.concat(data[key])});
+  setVenues(allVenues) {
+    this.setState(allVenues);
   }
 
 
@@ -53,8 +45,8 @@ class App extends Component {
       <div className="container-app">
       <Header />
       <div className="container-main-content">
-      <SideBar map={this.state.map} mapLoaded={this.state.map} google={this.state.google} allVenues={this.state.venuesAll}/>
-      <Map onMapLoad={this.setMap} mapCenter={this.state.mapCenter}/>
+      <SideBar map={this.state.map} mapLoaded={this.state.map} google={this.state.google} allVenues={this.state.allVenues} />
+      <Map onMapLoad={this.setMap} mapCenter={this.state.mapCenter} map={this.state.map}/>
       </div>
 
       </div>

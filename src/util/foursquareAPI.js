@@ -3,37 +3,29 @@ const endPoint = `/search?`;
 const client_id=`client_id=ITEIOPINLTI14IC45A2KDKWVV3NQWJPINDBMRRT0UCNLPCQD`;
 const client_secret=`client_secret=FWICMHMU5EFPJUENKPVEQ1QWV524LIGOVGMUEEI3ADFHMRTM`;
 const version = `v=20181022`;
-const radius = 'radius=250';
+const radius = 'radius=350';
+const categoryID = 'categoryId=4bf58dd8d48988d116941735';
 
 
-function getCategoryID(category) {
-  if(category === 'venuesBar')
-    return '4bf58dd8d48988d116941735';
-  if(category === 'venuesFood')
-    return '4d4b7105d754a06374d81259';
-  if(category === 'venuesRecreation')
-    return '4d4b7105d754a06377d81259';
-}
 
 
-export async function simpleFetch(location, category, update) {
+export async function simpleFetch(location, update) {
   const ll = `ll=${location.lat},${location.lng}`;
-  const categoryID = 'categoryId='+ getCategoryID(category);
-
 
   let venues = null;
   try{
-    let response = await fetch(`${url}${endPoint}&${client_id}&${client_secret}&${version}&${ll}&${radius}&${categoryID}&limit=10`);
+    let response = await fetch(`${url}${endPoint}&${client_id}&${client_secret}&${version}&${ll}&${radius}&${categoryID}&limit=30`);
     if(response.status === 200) {
       venues = await response.json();
     } else {
-      console.log("you need from service worker");
+      console.log("Error");
+      alert("No venues found please try again");
     }
 
   } catch(e) {
       console.log(e);
   }
-  const data = {[category]: venues.response.venues};
+  const data = {allVenues: venues.response.venues};
   update(data);
 
   return  venues.response.venues;

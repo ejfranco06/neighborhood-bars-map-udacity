@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+/*
+  VenuCard displays a venues name and manages it's markers and infowindow
+*/
 class VenueCard extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +31,9 @@ class VenueCard extends Component {
     this.removeMarker();
   }
 
+  /*
+    Create a marker for a venue
+  */
   createMarker() {
     if (!this.props.map) {
       console.log("no map");
@@ -51,6 +57,9 @@ class VenueCard extends Component {
     }
   }
 
+  /*
+    Create an infowindow for a venue
+  */
   createInfoWindow() {
     if (!this.props.map) {
       return;
@@ -70,10 +79,16 @@ class VenueCard extends Component {
     });
   }
 
+  /*
+    Remove a marker from the map
+  */
   removeMarker() {
     this.marker.setMap(null);
   }
 
+  /*
+    Animate a marker to bounce;
+  */
   markerBounce() {
     if (!this.marker) {
       return;
@@ -82,6 +97,9 @@ class VenueCard extends Component {
     window.setTimeout(() => this.marker.setAnimation(null, 1500));
   }
 
+  /*
+    Pan map to closer to marker
+  */
   focusMarker() {
     const map = this.props.map;
     if (map) {
@@ -91,6 +109,9 @@ class VenueCard extends Component {
     }
   }
 
+  /*
+    Open a venues infowindow
+  */
   openInfoWindow() {
     if (!this.infoWindow || !this.marker) {
       return;
