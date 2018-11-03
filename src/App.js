@@ -45,7 +45,7 @@ class App extends Component {
       <div className="container-app">
       <Header />
       <div className="container-main-content">
-      <SideBar map={this.state.map} mapLoaded={this.state.map} google={this.state.google} allVenues={this.state.allVenues} />
+      <SideBar map={this.state.map} allVenues={this.state.allVenues} />
       <Map onMapLoad={this.setMap} mapCenter={this.state.mapCenter} map={this.state.map}/>
       </div>
 
