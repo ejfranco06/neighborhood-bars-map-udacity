@@ -16,3 +16,7 @@ and zooms in and out of a dynamic map. The app provides more details about the b
 * The side bar list all bar that are close by
 * The filter allows you to find bars by narrowing them down by Name
 * The map will show you where they are located.
+
+## APIs used
+* Google maps API for showing map content
+* fourSquare API for  bar venues listing
