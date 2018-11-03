@@ -7,8 +7,6 @@ const radius = 'radius=350';
 const categoryID = 'categoryId=4bf58dd8d48988d116941735';
 
 
-
-
 export async function simpleFetch(location, update) {
   const ll = `ll=${location.lat},${location.lng}`;
 
@@ -27,7 +25,5 @@ export async function simpleFetch(location, update) {
   }
   const data = {allVenues: venues.response.venues};
   update(data);
-
-  return  venues.response.venues;
 
 }

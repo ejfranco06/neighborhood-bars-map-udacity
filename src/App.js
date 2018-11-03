@@ -16,7 +16,7 @@ class App extends Component {
       },
       google: null,
       mapLoaded: false,
-      allVenues: [],      
+      allVenues: [],
     }
     this.setMap = this.setMap.bind(this);
     this.setVenues = this.setVenues.bind(this);
